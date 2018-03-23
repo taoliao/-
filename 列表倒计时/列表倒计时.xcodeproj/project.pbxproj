@@ -15,6 +15,8 @@
 		D46A89532064CFBE0027D3DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A89522064CFBE0027D3DA /* main.m */; };
 		D46A895D2064CFBE0027D3DA /* _____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A895C2064CFBE0027D3DA /* _____Tests.m */; };
 		D46A89682064CFBF0027D3DA /* _____UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A89672064CFBF0027D3DA /* _____UITests.m */; };
+		D46A897A2064E9A20027D3DA /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A89792064E9A20027D3DA /* Model.m */; };
+		D46A897D2064EA460027D3DA /* TimerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A897C2064EA460027D3DA /* TimerCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		D46A89632064CFBE0027D3DA /* 列表倒计时UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "列表倒计时UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46A89672064CFBF0027D3DA /* _____UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "_____UITests.m"; sourceTree = "<group>"; };
 		D46A89692064CFBF0027D3DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D46A89782064E9A20027D3DA /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		D46A89792064E9A20027D3DA /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		D46A897B2064EA460027D3DA /* TimerCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerCell.h; sourceTree = "<group>"; };
+		D46A897C2064EA460027D3DA /* TimerCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimerCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,10 @@
 				D46A89442064CFBE0027D3DA /* AppDelegate.m */,
 				D46A89462064CFBE0027D3DA /* ViewController.h */,
 				D46A89472064CFBE0027D3DA /* ViewController.m */,
+				D46A897B2064EA460027D3DA /* TimerCell.h */,
+				D46A897C2064EA460027D3DA /* TimerCell.m */,
+				D46A89782064E9A20027D3DA /* Model.h */,
+				D46A89792064E9A20027D3DA /* Model.m */,
 				D46A89492064CFBE0027D3DA /* Main.storyboard */,
 				D46A894C2064CFBE0027D3DA /* Assets.xcassets */,
 				D46A894E2064CFBE0027D3DA /* LaunchScreen.storyboard */,
@@ -265,9 +275,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D46A897D2064EA460027D3DA /* TimerCell.m in Sources */,
 				D46A89482064CFBE0027D3DA /* ViewController.m in Sources */,
 				D46A89532064CFBE0027D3DA /* main.m in Sources */,
 				D46A89452064CFBE0027D3DA /* AppDelegate.m in Sources */,
+				D46A897A2064E9A20027D3DA /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
