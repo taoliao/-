@@ -21,6 +21,8 @@ static NSString *const cellId = @"defultCellId";
 
 @property(nonatomic,strong) dispatch_source_t gdcTimer; //GCD timer
 
+@property(nonatomic,strong) NSThread *foreverThread;
+
 @end
 
 @implementation ViewController
@@ -42,6 +44,10 @@ static NSString *const cellId = @"defultCellId";
     [self starTimer];
     
 //    [self addRunLoopObserver];
+    
+    //延迟调用 指定runloop的mode  @[NSDefaultRunLoopMode,UITrackingRunLoopMode]
+//    [self performSelector:@selector(test) withObject:nil afterDelay:2.0 inModes:@[NSDefaultRunLoopMode,UITrackingRunLoopMode]];
+    
     
 }
 
@@ -174,7 +180,47 @@ static NSString *const cellId = @"defultCellId";
     return cell;
 }
 
+/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+     [self addForeverThread];
+
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+
+    [self performSelector:@selector(tlThreadAction) onThread:self.foreverThread withObject:nil waitUntilDone:YES];
+
+}
+
+- (void)tlThreadAction {
+
+    NSLog(@"*********%@ ****",[NSRunLoop currentRunLoop]);
+
+}
+
+//添加常驻线程
+- (void)addForeverThread {
+    
+    NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(threadDO) object:nil];
+    
+    self.foreverThread = thread;
+    
+    [thread start];
+    
+}
+
+- (void)threadDO {
+    
+    NSLog(@"------ %s ------",__func__);
+ 
+    //给RunLoop添加Source，NSTimer 才能使RunLoop运行，但是添加Observer不行
+ 
+    [[NSRunLoop currentRunLoop] addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+    
+    [[NSRunLoop currentRunLoop] run];  //给子线程添加一个runloop并且启动 runloop
+}
+ */
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
