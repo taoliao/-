@@ -41,7 +41,58 @@ static NSString *const cellId = @"defultCellId";
     
     [self starTimer];
     
+//    [self addRunLoopObserver];
+    
 }
+
+//测试添加一个RunLoopObserver
+- (void)addRunLoopObserver {
+    
+    /*
+     第一个：kCFAllocatorDefault 分配储存空间
+     第二个：要监听的状态 // kCFRunLoopEntry = (1UL << 0),
+     kCFRunLoopBeforeTimers = (1UL << 1),
+     kCFRunLoopBeforeSources = (1UL << 2),
+     kCFRunLoopBeforeWaiting = (1UL << 5),
+     kCFRunLoopAfterWaiting = (1UL << 6),
+     kCFRunLoopExit = (1UL << 7),
+     kCFRunLoopAllActivities = 0x0
+     
+     */
+    
+ CFRunLoopObserverRef observer =  CFRunLoopObserverCreateWithHandler(kCFAllocatorDefault, kCFRunLoopAllActivities, YES, 0, ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
+        
+        switch (activity) {
+            case kCFRunLoopEntry:
+                NSLog(@"runloop进入");
+                break;
+            case kCFRunLoopBeforeTimers:
+                NSLog(@"runloop要去处理timer");
+                break;
+            case kCFRunLoopBeforeSources:
+                NSLog(@"runloop要去处理Sources");
+                break;
+            case kCFRunLoopBeforeWaiting:
+                NSLog(@"runloop睡觉了");
+                break;
+            case kCFRunLoopAfterWaiting:
+                NSLog(@"runloop醒了");
+                break;
+            case kCFRunLoopExit:
+                NSLog(@"runloop退出");
+                break;
+                
+            default:
+                break;
+        }
+        
+    });
+    
+    CFRunLoopAddObserver(CFRunLoopGetCurrent(), observer, kCFRunLoopDefaultMode);
+    
+    CFRelease(observer);
+}
+
 
 - (void)getDatas {
     
