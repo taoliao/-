@@ -10,7 +10,6 @@
 #import "Model.h"
 #import "TimerCell.h"
 
-
 static NSString *const cellId = @"defultCellId";
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -20,11 +19,14 @@ static NSString *const cellId = @"defultCellId";
 
 @property (nonatomic, strong) NSTimer *timer;
 
+@property(nonatomic,strong) dispatch_source_t gdcTimer; //GCD timer
+
 @end
 
 @implementation ViewController
 
 - (NSMutableArray *)dataSourch {
+    
     if (!_dataSourch) {
         _dataSourch = [NSMutableArray array];
     }
@@ -59,13 +61,32 @@ static NSString *const cellId = @"defultCellId";
 - (void)starTimer {
     
     if(!self.timer) {
-         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeDO:) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+        
+//         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeDO:) userInfo:nil repeats:YES];
+//         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+        
+        
+        dispatch_queue_t queue = dispatch_get_main_queue();
+        
+        dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+        
+        self.gdcTimer = timer;
+
+        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+
+        dispatch_source_set_event_handler(timer, ^{
+            
+            [self timeDO:self.gdcTimer];
+            
+        });
+
+        dispatch_resume(timer);
+        
     }
     
 }
 
-- (void)timeDO:(NSTimer *)timer {
+- (void)timeDO:(dispatch_source_t)timer {
     
     [self.dataSourch enumerateObjectsUsingBlock:^(Model  *_Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
